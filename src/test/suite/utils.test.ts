@@ -3,8 +3,44 @@ import { stripCodeFences } from '../../services/promptService';
 import { shouldStripCodeFences, getLanguageDisplayName, getLanguageFromExtension } from '../../utils/languageUtils';
 import { validateInputSize } from '../../utils/editorUtils';
 import { formatError, isNetworkError } from '../../utils/errorUtils';
+import { findOfflineMatch } from '../../services/offlineDatabase';
 
 suite('SolveAI Utilities Test Suite', () => {
+
+  // --- offlineDatabase ---
+  suite('offlineDatabase', () => {
+    test('matches "bar chart in python"', () => {
+      const match = findOfflineMatch('bar chart in python', 'python');
+      assert.ok(match);
+      assert.strictEqual(match?.id, 'py-bar-chart');
+      assert.ok(match?.code.includes('plt.bar'));
+    });
+
+    test('matches "histogram in r"', () => {
+      const match = findOfflineMatch('histogram in r', 'r');
+      assert.ok(match);
+      assert.strictEqual(match?.id, 'r-histogram');
+      assert.ok(match?.code.includes('hist('));
+    });
+
+    test('matches "heatmap" in python context', () => {
+      const match = findOfflineMatch('draw a heatmap', 'python');
+      assert.ok(match);
+      assert.strictEqual(match?.id, 'py-heatmap');
+    });
+
+    test('matches "grouped bar chart" in R context', () => {
+      const match = findOfflineMatch('grouped bar chart in r', 'r');
+      assert.ok(match);
+      assert.strictEqual(match?.id, 'r-grouped-bar-chart');
+    });
+
+    test('matches "box plot"', () => {
+      const match = findOfflineMatch('create a box plot', 'python');
+      assert.ok(match);
+      assert.strictEqual(match?.id, 'py-box-plot');
+    });
+  });
 
   // --- stripCodeFences ---
   suite('stripCodeFences', () => {

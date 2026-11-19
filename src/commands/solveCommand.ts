@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { ollamaService } from '../services/ollamaService';
 import { buildSolvePrompt, stripCodeFences } from '../services/promptService';
+import { findOfflineMatch } from '../services/offlineDatabase';
 import { getActiveEditorContext, validateInputSize, applyAnswerToEditor } from '../utils/editorUtils';
 import { buildConnectionErrorMessage } from '../utils/errorUtils';
 import { shouldStripCodeFences } from '../utils/languageUtils';
@@ -20,7 +21,7 @@ export async function solveCommand(statusBar: StatusBarManager): Promise<void> {
     // Show input dialog
     const userInput = await vscode.window.showInputBox({
       prompt: 'What do you want to solve?',
-      placeHolder: 'e.g. Write a Python program to draw a bar chart',
+      placeHolder: 'e.g. bar chart in python / histogram in r',
       ignoreFocusOut: true,
     });
 
@@ -46,6 +47,9 @@ export async function solveCommand(statusBar: StatusBarManager): Promise<void> {
 
   statusBar.setWorking();
 
+  // 1. Check for instant offline match
+  const offlineMatch = findOfflineMatch(context.text, context.language);
+
   try {
     const prompt = buildSolvePrompt(context);
     const result = await ollamaService.sendPrompt(prompt);
@@ -53,24 +57,40 @@ export async function solveCommand(statusBar: StatusBarManager): Promise<void> {
     const strip = shouldStripCodeFences(editor.document.languageId);
     const cleanAnswer = stripCodeFences(result.answer, strip);
 
-    if (ollamaService.isAutoApply()) {
-      await applyAnswerToEditor(editor, cleanAnswer, context);
-      vscode.window.showInformationMessage(`SolveAI: Applied answer from ${result.model}.`);
-    } else {
-      const choice = await showAnswerPreview(cleanAnswer, result.model);
-      if (choice === 'apply') {
-        await applyAnswerToEditor(editor, cleanAnswer, context);
-        vscode.window.showInformationMessage('SolveAI: Answer applied to editor.');
-      } else if (choice === 'copy') {
-        await vscode.env.clipboard.writeText(cleanAnswer);
-        vscode.window.showInformationMessage('SolveAI: Answer copied to clipboard.');
-      }
-    }
+    await presentAnswer(editor, cleanAnswer, result.model, context);
   } catch (error) {
-    const baseUrl = ollamaService.getBaseUrl();
-    const msg = buildConnectionErrorMessage(baseUrl, error);
-    vscode.window.showErrorMessage(msg);
+    // 2. Safety Fallback: If Ollama is offline or unavailable, check offline database!
+    if (offlineMatch) {
+      vscode.window.showInformationMessage(`SolveAI: Solved using built-in offline engine (${offlineMatch.title}).`);
+      await presentAnswer(editor, offlineMatch.code, `Offline Knowledge Base (${offlineMatch.title})`, context);
+    } else {
+      const baseUrl = ollamaService.getBaseUrl();
+      const msg = buildConnectionErrorMessage(baseUrl, error);
+      vscode.window.showErrorMessage(msg);
+    }
   } finally {
     statusBar.setReady();
   }
 }
+
+async function presentAnswer(
+  editor: vscode.TextEditor,
+  answer: string,
+  sourceModel: string,
+  context: any
+): Promise<void> {
+  if (ollamaService.isAutoApply()) {
+    await applyAnswerToEditor(editor, answer, context);
+    vscode.window.showInformationMessage(`SolveAI: Applied answer from ${sourceModel}.`);
+  } else {
+    const choice = await showAnswerPreview(answer, sourceModel);
+    if (choice === 'apply') {
+      await applyAnswerToEditor(editor, answer, context);
+      vscode.window.showInformationMessage('SolveAI: Answer applied to editor.');
+    } else if (choice === 'copy') {
+      await vscode.env.clipboard.writeText(answer);
+      vscode.window.showInformationMessage('SolveAI: Answer copied to clipboard.');
+    }
+  }
+}
+

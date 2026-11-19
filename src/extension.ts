@@ -1,3 +1,4 @@
+
 import * as vscode from 'vscode';
 import { StatusBarManager } from './ui/statusBar';
 import { solveCommand } from './commands/solveCommand';
