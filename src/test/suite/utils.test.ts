@@ -1,0 +1,122 @@
+import * as assert from 'assert';
+import { stripCodeFences } from '../../services/promptService';
+import { shouldStripCodeFences, getLanguageDisplayName, getLanguageFromExtension } from '../../utils/languageUtils';
+import { validateInputSize } from '../../utils/editorUtils';
+import { formatError, isNetworkError } from '../../utils/errorUtils';
+
+suite('SolveAI Utilities Test Suite', () => {
+
+  // --- stripCodeFences ---
+  suite('stripCodeFences', () => {
+    test('strips python fence', () => {
+      const input = '```python\nprint("hello")\n```';
+      const result = stripCodeFences(input, true);
+      assert.strictEqual(result, 'print("hello")');
+    });
+
+    test('strips plain fence', () => {
+      const input = '```\nsome code\n```';
+      const result = stripCodeFences(input, true);
+      assert.strictEqual(result, 'some code');
+    });
+
+    test('preserves markdown when strip=false', () => {
+      const input = '```python\nprint("hello")\n```';
+      const result = stripCodeFences(input, false);
+      assert.strictEqual(result, input);
+    });
+
+    test('returns plain text unchanged', () => {
+      const input = 'just some text without fences';
+      const result = stripCodeFences(input, true);
+      assert.strictEqual(result, input);
+    });
+
+    test('handles fence without language tag', () => {
+      const input = '```\nconsole.log("hi")\n```';
+      const result = stripCodeFences(input, true);
+      assert.strictEqual(result, 'console.log("hi")');
+    });
+  });
+
+  // --- languageUtils ---
+  suite('languageUtils', () => {
+    test('python languageId returns Python', () => {
+      assert.strictEqual(getLanguageDisplayName('python'), 'Python');
+    });
+
+    test('r languageId returns R', () => {
+      assert.strictEqual(getLanguageDisplayName('r'), 'R');
+    });
+
+    test('cpp returns C++', () => {
+      assert.strictEqual(getLanguageDisplayName('cpp'), 'C++');
+    });
+
+    test('unknown language returns itself', () => {
+      assert.strictEqual(getLanguageDisplayName('cobol'), 'cobol');
+    });
+
+    test('shouldStripCodeFences false for markdown', () => {
+      assert.strictEqual(shouldStripCodeFences('markdown'), false);
+    });
+
+    test('shouldStripCodeFences true for python', () => {
+      assert.strictEqual(shouldStripCodeFences('python'), true);
+    });
+
+    test('getLanguageFromExtension .py returns Python', () => {
+      assert.strictEqual(getLanguageFromExtension('main.py'), 'Python');
+    });
+
+    test('getLanguageFromExtension .java returns Java', () => {
+      assert.strictEqual(getLanguageFromExtension('Main.java'), 'Java');
+    });
+  });
+
+  // --- validateInputSize ---
+  suite('validateInputSize', () => {
+    test('valid small input', () => {
+      const result = validateInputSize('Write a Python program');
+      assert.strictEqual(result.valid, true);
+    });
+
+    test('empty input is invalid', () => {
+      const result = validateInputSize('   ');
+      assert.strictEqual(result.valid, false);
+    });
+
+    test('oversized input is invalid', () => {
+      const big = 'x'.repeat(9000);
+      const result = validateInputSize(big);
+      assert.strictEqual(result.valid, false);
+      assert.ok(result.message?.includes('too large'));
+    });
+  });
+
+  // --- errorUtils ---
+  suite('errorUtils', () => {
+    test('formatError with Error object', () => {
+      const e = new Error('test error');
+      assert.strictEqual(formatError(e), 'test error');
+    });
+
+    test('formatError with string', () => {
+      assert.strictEqual(formatError('oops'), 'oops');
+    });
+
+    test('formatError with unknown', () => {
+      assert.strictEqual(formatError(42), 'An unknown error occurred.');
+    });
+
+    test('isNetworkError detects ECONNREFUSED', () => {
+      const e = new Error('connect ECONNREFUSED 127.0.0.1:11434');
+      assert.strictEqual(isNetworkError(e), true);
+    });
+
+    test('isNetworkError returns false for logic errors', () => {
+      const e = new Error('Model not found');
+      assert.strictEqual(isNetworkError(e), false);
+    });
+  });
+});
