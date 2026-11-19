@@ -47,9 +47,15 @@ export async function solveCommand(statusBar: StatusBarManager): Promise<void> {
 
   statusBar.setWorking();
 
-  // 1. Check for instant offline match
+  // 1. If user question matches the offline syllabus database, answer INSTANTLY (0 delay, no waiting on Ollama)
   const offlineMatch = findOfflineMatch(context.text, context.language);
+  if (offlineMatch) {
+    statusBar.setReady();
+    await presentAnswer(editor, offlineMatch.code, `Offline Knowledge Base (${offlineMatch.title})`, context);
+    return;
+  }
 
+  // 2. Otherwise send to Ollama LLM
   try {
     const prompt = buildSolvePrompt(context);
     const result = await ollamaService.sendPrompt(prompt);
@@ -59,15 +65,9 @@ export async function solveCommand(statusBar: StatusBarManager): Promise<void> {
 
     await presentAnswer(editor, cleanAnswer, result.model, context);
   } catch (error) {
-    // 2. Safety Fallback: If Ollama is offline or unavailable, check offline database!
-    if (offlineMatch) {
-      vscode.window.showInformationMessage(`SolveAI: Solved using built-in offline engine (${offlineMatch.title}).`);
-      await presentAnswer(editor, offlineMatch.code, `Offline Knowledge Base (${offlineMatch.title})`, context);
-    } else {
-      const baseUrl = ollamaService.getBaseUrl();
-      const msg = buildConnectionErrorMessage(baseUrl, error);
-      vscode.window.showErrorMessage(msg);
-    }
+    const baseUrl = ollamaService.getBaseUrl();
+    const msg = buildConnectionErrorMessage(baseUrl, error);
+    vscode.window.showErrorMessage(msg);
   } finally {
     statusBar.setReady();
   }
