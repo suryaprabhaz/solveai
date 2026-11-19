@@ -10,20 +10,9 @@ let statusBar: StatusBarManager;
 
 export function activate(context: vscode.ExtensionContext): void {
   statusBar = new StatusBarManager();
-
-  // Show status bar when editor is active
-  const updateStatusBarVisibility = (): void => {
-    if (vscode.window.activeTextEditor) {
-      statusBar.show();
-    } else {
-      statusBar.hide();
-    }
-  };
-
-  updateStatusBarVisibility();
+  statusBar.show();
 
   context.subscriptions.push(
-    vscode.window.onDidChangeActiveTextEditor(updateStatusBarVisibility),
     statusBar as unknown as vscode.Disposable,
 
     vscode.commands.registerCommand('solveai.solve', async () => {

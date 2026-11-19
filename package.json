@@ -25,7 +25,13 @@
     "vscode"
   ],
   "activationEvents": [
-    "onStartupFinished"
+    "onStartupFinished",
+    "onCommand:solveai.solve",
+    "onCommand:solveai.fix",
+    "onCommand:solveai.explain",
+    "onCommand:solveai.checkConnection",
+    "onCommand:solveai.selectModel",
+    "onCommand:solveai.openSettings"
   ],
   "main": "./out/extension.js",
   "icon": "icon.png",
