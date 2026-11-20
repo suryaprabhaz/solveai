@@ -8,13 +8,16 @@ export interface OfflineSolution {
 
 export const OFFLINE_DATABASE: OfflineSolution[] = [
   // ==========================================
-  // PYTHON VISUALIZATION PRACTICAL QUESTIONS
+  // PYTHON — MAIN VISUALIZATION QUESTIONS
   // ==========================================
   {
     id: 'py-line-chart',
     language: 'python',
     title: 'Line Chart',
-    keywords: ['line chart', 'line graph', 'line plot', 'plot line', 'time series'],
+    keywords: [
+      'line chart', 'line graph', 'line plot', 'plot line', 'time series',
+      'line chart,py', 'line chart, py', 'line chart py', 'line plot,py', 'line plot, py', 'line plot py'
+    ],
     code: `import matplotlib.pyplot as plt
 
 # Data
@@ -36,7 +39,10 @@ plt.show()`
     id: 'py-bar-chart',
     language: 'python',
     title: 'Bar Chart',
-    keywords: ['bar chart', 'bar graph', 'bar plot', 'student marks', 'categories'],
+    keywords: [
+      'bar chart', 'bar plot', 'bar graph', 'student marks', 'categories',
+      'bar plot,py', 'bar plot, py', 'bar plot py', 'bar chart,py', 'bar chart, py', 'bar chart py'
+    ],
     code: `import matplotlib.pyplot as plt
 
 # Data
@@ -57,7 +63,10 @@ plt.show()`
     id: 'py-histogram',
     language: 'python',
     title: 'Histogram',
-    keywords: ['histogram', 'frequency distribution', 'hist plot', 'distribution'],
+    keywords: [
+      'histogram', 'frequency distribution', 'hist plot', 'distribution',
+      'histogram,py', 'histogram, py', 'histogram py', 'hist plot,py', 'hist,py'
+    ],
     code: `import matplotlib.pyplot as plt
 import numpy as np
 
@@ -79,7 +88,10 @@ plt.show()`
     id: 'py-pie-chart',
     language: 'python',
     title: 'Pie Chart',
-    keywords: ['pie chart', 'pie plot', 'percentage chart', 'proportions'],
+    keywords: [
+      'pie chart', 'pie plot', 'percentage chart', 'proportions',
+      'pie chart,py', 'pie chart, py', 'pie chart py', 'pie plot,py', 'pie,py'
+    ],
     code: `import matplotlib.pyplot as plt
 
 # Data
@@ -100,7 +112,10 @@ plt.show()`
     id: 'py-scatter-plot',
     language: 'python',
     title: 'Scatter Plot',
-    keywords: ['scatter plot', 'scatter chart', 'scatter graph', 'correlation plot'],
+    keywords: [
+      'scatter plot', 'scatter chart', 'scatter graph', 'correlation plot',
+      'scatter plot,py', 'scatter plot, py', 'scatter plot py', 'scatter,py', 'scatter chart,py'
+    ],
     code: `import matplotlib.pyplot as plt
 
 # Data
@@ -121,7 +136,10 @@ plt.show()`
     id: 'py-heatmap',
     language: 'python',
     title: 'Heatmap',
-    keywords: ['heatmap', 'heat map', 'correlation matrix', 'matrix plot'],
+    keywords: [
+      'heatmap', 'heat map', 'correlation matrix', 'matrix plot',
+      'heatmap,py', 'heatmap, py', 'heatmap py', 'heat map,py', 'heat map, py'
+    ],
     code: `import matplotlib.pyplot as plt
 import numpy as np
 
@@ -154,7 +172,10 @@ plt.show()`
     id: 'py-box-plot',
     language: 'python',
     title: 'Box Plot',
-    keywords: ['box plot', 'boxplot', 'whisker plot', 'box and whisker'],
+    keywords: [
+      'box plot', 'boxplot', 'whisker plot', 'box and whisker',
+      'box plot,py', 'box plot, py', 'box plot py', 'boxplot,py', 'boxplot, py', 'boxplot py'
+    ],
     code: `import matplotlib.pyplot as plt
 import numpy as np
 
@@ -177,13 +198,16 @@ plt.show()`
   },
 
   // ==========================================
-  // R VISUALIZATION PRACTICAL QUESTIONS
+  // R — MAIN VISUALIZATION QUESTIONS
   // ==========================================
   {
     id: 'r-line-chart',
     language: 'r',
     title: 'Line Chart',
-    keywords: ['line chart', 'line graph', 'line plot', 'trend plot'],
+    keywords: [
+      'line chart', 'line graph', 'line plot', 'trend plot',
+      'line chart,r', 'line chart, r', 'line chart r', 'line plot,r', 'line plot, r', 'line plot r'
+    ],
     code: `# Data
 x <- c(1, 2, 3, 4, 5)
 y <- c(7, 12, 28, 35, 42)
@@ -199,7 +223,10 @@ grid()`
     id: 'r-bar-chart',
     language: 'r',
     title: 'Bar Chart',
-    keywords: ['bar chart', 'bar plot', 'barplot', 'bar graph'],
+    keywords: [
+      'bar chart', 'bar plot', 'barplot', 'bar graph',
+      'bar plot,r', 'bar plot, r', 'bar plot r', 'bar chart,r', 'bar chart, r', 'bar chart r', 'barplot,r'
+    ],
     code: `# Data
 values <- c(80, 70, 90, 60, 75)
 categories <- c("A", "B", "C", "D", "E")
@@ -215,7 +242,10 @@ grid(nx = NA, ny = NULL)`
     id: 'r-histogram',
     language: 'r',
     title: 'Histogram',
-    keywords: ['histogram', 'hist plot', 'frequency distribution'],
+    keywords: [
+      'histogram', 'hist plot', 'frequency distribution',
+      'histogram,r', 'histogram, r', 'histogram r', 'hist plot,r', 'hist,r'
+    ],
     code: `# Sample Data
 set.seed(42)
 scores <- rnorm(100, mean = 65, sd = 10)
@@ -230,7 +260,10 @@ hist(scores, col = "coral", border = "black", breaks = 8,
     id: 'r-box-plot',
     language: 'r',
     title: 'Box Plot',
-    keywords: ['box plot', 'boxplot', 'whisker plot'],
+    keywords: [
+      'box plot', 'boxplot', 'whisker plot',
+      'box plot,r', 'box plot, r', 'box plot r', 'boxplot,r', 'boxplot, r', 'boxplot r'
+    ],
     code: `# Sample Data
 data <- list(Group1 = c(23, 25, 29, 34, 30),
              Group2 = c(19, 20, 22, 24, 25),
@@ -247,7 +280,10 @@ grid()`
     id: 'r-scatter-plot',
     language: 'r',
     title: 'Scatter Plot',
-    keywords: ['scatter plot', 'scatter plot in r', 'scatter graph'],
+    keywords: [
+      'scatter plot', 'scatter plot in r', 'scatter graph',
+      'scatter plot,r', 'scatter plot, r', 'scatter plot r', 'scatter,r', 'scatter chart,r'
+    ],
     code: `# Data
 x <- c(10, 20, 30, 40, 50, 60, 70)
 y <- c(15, 28, 35, 48, 52, 69, 75)
@@ -264,7 +300,10 @@ grid()`
     id: 'r-grouped-bar-chart',
     language: 'r',
     title: 'Grouped Bar Chart',
-    keywords: ['grouped bar chart', 'clustered bar chart', 'multiple bar chart'],
+    keywords: [
+      'grouped bar chart', 'clustered bar chart', 'multiple bar chart',
+      'grouped bar chart,r', 'grouped bar chart, r', 'grouped bar chart r', 'grouped bar plot,r'
+    ],
     code: `# Data matrix (rows = sub-categories, columns = main categories)
 data <- matrix(c(12, 18, 20, 25, 15, 22), nrow = 2, byrow = TRUE)
 colnames(data) <- c("Q1", "Q2", "Q3")
@@ -283,7 +322,10 @@ grid(nx = NA, ny = NULL)`
     id: 'r-pie-chart',
     language: 'r',
     title: 'Pie Chart',
-    keywords: ['pie chart', 'pie plot', 'pie chart in r'],
+    keywords: [
+      'pie chart', 'pie plot', 'pie chart in r',
+      'pie chart,r', 'pie chart, r', 'pie chart r', 'pie plot,r', 'pie,r'
+    ],
     code: `# Data
 slices <- c(40, 25, 20, 15)
 labels <- c("Apples", "Bananas", "Cherries", "Dates")
@@ -297,23 +339,41 @@ pie(slices, labels = labels, col = rainbow(length(slices)),
 ];
 
 export function findOfflineMatch(query: string, documentLanguage?: string): OfflineSolution | undefined {
-  const q = query.toLowerCase().trim();
+  const rawQ = query.toLowerCase().trim();
+  // Normalized query: remove extra spaces and punctuation around commas
+  const q = rawQ.replace(/\s*,\s*/g, ',').trim();
   const lang = documentLanguage?.toLowerCase().trim();
 
-  // 1. Try matching with explicit language filtering first
-  let candidates = OFFLINE_DATABASE;
-  if (lang === 'python' || lang === 'py' || q.includes('python')) {
-    candidates = OFFLINE_DATABASE.filter(c => c.language === 'python');
-  } else if (lang === 'r' || q.includes(' in r') || q.startsWith('r ') || q.includes(' r ')) {
-    candidates = OFFLINE_DATABASE.filter(c => c.language === 'r');
+  // Explicit target language detection from commas / suffix (e.g. "bar plot,py" or "histogram,r")
+  let targetLang: 'python' | 'r' | undefined = undefined;
+  if (
+    q.endsWith(',py') || q.endsWith(',python') ||
+    q.includes(',py ') || q.includes(',python ') ||
+    q.includes('in python') || q.includes('python') ||
+    lang === 'python' || lang === 'py'
+  ) {
+    targetLang = 'python';
+  } else if (
+    q.endsWith(',r') || q.includes(',r ') ||
+    q.includes('in r') || q.includes(' r ') || q.startsWith('r ') ||
+    lang === 'r'
+  ) {
+    targetLang = 'r';
   }
 
-  // Sort candidate keywords so longer/more specific phrases (e.g. 'grouped bar chart') match before shorter ones ('bar chart')
+  // 1. Try candidates based on target language if identified
+  let candidates = OFFLINE_DATABASE;
+  if (targetLang) {
+    candidates = OFFLINE_DATABASE.filter(c => c.language === targetLang);
+  }
+
+  // Check candidates with keyword matches (longest keyword first)
   const scoredMatches: { item: OfflineSolution; matchedLength: number }[] = [];
 
   for (const item of candidates) {
     for (const kw of item.keywords) {
-      if (q.includes(kw)) {
+      const normalizedKw = kw.replace(/\s*,\s*/g, ',');
+      if (q.includes(normalizedKw) || rawQ.includes(kw)) {
         scoredMatches.push({ item, matchedLength: kw.length });
       }
     }
@@ -324,10 +384,11 @@ export function findOfflineMatch(query: string, documentLanguage?: string): Offl
     return scoredMatches[0].item;
   }
 
-  // Fallback to checking all items if language filter yielded no match
+  // 2. Fallback: check all candidates if target language filter had no match
   for (const item of OFFLINE_DATABASE) {
     for (const kw of item.keywords) {
-      if (q.includes(kw)) {
+      const normalizedKw = kw.replace(/\s*,\s*/g, ',');
+      if (q.includes(normalizedKw) || rawQ.includes(kw)) {
         scoredMatches.push({ item, matchedLength: kw.length });
       }
     }

@@ -44,14 +44,14 @@ export function activate(context: vscode.ExtensionContext): void {
     })
   );
 
-  // Show connection status info on first activation (silent)
+  // Silent non-blocking connection check (never blocks UI or triggers warning state on startup)
   ollamaService.checkConnection().then((result) => {
-    if (!result.connected) {
-      statusBar.setError();
-      // Don't pop a notification — just update the status bar
+    if (result.connected) {
+      statusBar.setReady();
     }
   }).catch(() => {
-    statusBar.setError();
+    // Keep ready state so offline database works instantly
+    statusBar.setReady();
   });
 }
 

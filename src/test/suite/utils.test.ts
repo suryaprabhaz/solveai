@@ -16,6 +16,22 @@ suite('SolveAI Utilities Test Suite', () => {
       assert.ok(match?.code.includes('plt.bar'));
     });
 
+    test('matches shorthand "bar plot,py"', () => {
+      const match = findOfflineMatch('bar plot,py');
+      assert.ok(match);
+      assert.strictEqual(match?.id, 'py-bar-chart');
+      assert.strictEqual(match?.language, 'python');
+      assert.ok(match?.code.includes('plt.bar'));
+    });
+
+    test('matches shorthand "histogram,r"', () => {
+      const match = findOfflineMatch('histogram,r');
+      assert.ok(match);
+      assert.strictEqual(match?.id, 'r-histogram');
+      assert.strictEqual(match?.language, 'r');
+      assert.ok(match?.code.includes('hist('));
+    });
+
     test('matches "histogram in r"', () => {
       const match = findOfflineMatch('histogram in r', 'r');
       assert.ok(match);
@@ -29,16 +45,31 @@ suite('SolveAI Utilities Test Suite', () => {
       assert.strictEqual(match?.id, 'py-heatmap');
     });
 
+    test('matches "heatmap,py"', () => {
+      const match = findOfflineMatch('heatmap,py');
+      assert.ok(match);
+      assert.strictEqual(match?.id, 'py-heatmap');
+    });
+
     test('matches "grouped bar chart" in R context', () => {
       const match = findOfflineMatch('grouped bar chart in r', 'r');
       assert.ok(match);
       assert.strictEqual(match?.id, 'r-grouped-bar-chart');
     });
 
-    test('matches "box plot"', () => {
-      const match = findOfflineMatch('create a box plot', 'python');
+    test('matches shorthand "grouped bar chart,r"', () => {
+      const match = findOfflineMatch('grouped bar chart,r');
       assert.ok(match);
-      assert.strictEqual(match?.id, 'py-box-plot');
+      assert.strictEqual(match?.id, 'r-grouped-bar-chart');
+    });
+
+    test('matches "box plot,py" and "box plot,r"', () => {
+      const pyMatch = findOfflineMatch('box plot,py');
+      const rMatch = findOfflineMatch('box plot,r');
+      assert.ok(pyMatch);
+      assert.strictEqual(pyMatch?.id, 'py-box-plot');
+      assert.ok(rMatch);
+      assert.strictEqual(rMatch?.id, 'r-box-plot');
     });
   });
 

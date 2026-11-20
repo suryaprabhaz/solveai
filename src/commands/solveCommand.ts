@@ -45,9 +45,8 @@ export async function solveCommand(statusBar: StatusBarManager): Promise<void> {
     return;
   }
 
-  statusBar.setWorking();
-
-  // 1. If user question matches the offline syllabus database, answer INSTANTLY (0 delay, no waiting on Ollama)
+  // Priority 1: Check offline syllabus database FIRST
+  // Instant response (0 ms latency, no network check, no Ollama requirement)
   const offlineMatch = findOfflineMatch(context.text, context.language);
   if (offlineMatch) {
     statusBar.setReady();
@@ -55,7 +54,8 @@ export async function solveCommand(statusBar: StatusBarManager): Promise<void> {
     return;
   }
 
-  // 2. Otherwise send to Ollama LLM
+  // Priority 2: Only if not in database, attempt Ollama LLM
+  statusBar.setWorking();
   try {
     const prompt = buildSolvePrompt(context);
     const result = await ollamaService.sendPrompt(prompt);

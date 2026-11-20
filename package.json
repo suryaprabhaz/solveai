@@ -2,7 +2,7 @@
   "name": "solveai",
   "displayName": "SolveAI — Local AI Code Solver",
   "description": "Solve coding questions directly inside VS Code using a local Ollama LLM. Select or type a question, click Solve, and replace it with the generated answer.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "publisher": "rizzzuu",
   "license": "MIT",
   "engines": {
