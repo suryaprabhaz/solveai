@@ -71,6 +71,30 @@ suite('SolveAI Utilities Test Suite', () => {
       assert.ok(rMatch);
       assert.strictEqual(rMatch?.id, 'r-box-plot');
     });
+
+    test('matches B.Tech C question "binary search in c"', () => {
+      const match = findOfflineMatch('binary search in c');
+      assert.ok(match);
+      assert.ok(match?.code.includes('binarySearch'));
+    });
+
+    test('matches B.Tech C++ question "LRU cache in cpp"', () => {
+      const match = findOfflineMatch('lru cache in cpp');
+      assert.ok(match);
+      assert.ok(match?.code.includes('LRUCache'));
+    });
+
+    test('matches B.Tech Java question "producer consumer in java"', () => {
+      const match = findOfflineMatch('producer consumer java');
+      assert.ok(match);
+      assert.ok(match?.code.includes('produce'));
+    });
+
+    test('matches B.Tech SQL question "second highest salary"', () => {
+      const match = findOfflineMatch('second highest salary in sql');
+      assert.ok(match);
+      assert.ok(match?.code.includes('SecondHighestSalary'));
+    });
   });
 
   // --- stripCodeFences ---

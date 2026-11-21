@@ -1,0 +1,68 @@
+[
+  {
+    "id": "html-student-registration-form",
+    "title": "Student Registration Form in HTML5",
+    "question": "Write semantic HTML5 code for student registration form with input validation (regex, required, email)",
+    "language": "html",
+    "subject": "Web Technologies",
+    "topic": "HTML",
+    "subtopic": "Forms",
+    "difficulty": "Easy",
+    "tags": [
+      "html",
+      "html",
+      "registration form html",
+      "student form in html",
+      "html form validation"
+    ],
+    "keywords": "registration form html student form in html html form validation",
+    "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Student Registration</title>\n</head>\n<body>\n    <h2>Student Registration Form</h2>\n    <form action=\"/register\" method=\"POST\">\n        <label for=\"name\">Full Name:</label>\n        <input type=\"text\" id=\"name\" name=\"name\" required><br><br>\n\n        <label for=\"email\">College Email:</label>\n        <input type=\"email\" id=\"email\" name=\"email\" required><br><br>\n\n        <label for=\"roll\">Roll Number:</label>\n        <input type=\"text\" id=\"roll\" name=\"roll\" pattern=\"[A-Za-z0-9]{8,10}\" title=\"8-10 alphanumeric characters\" required><br><br>\n\n        <label for=\"branch\">Branch:</label>\n        <select id=\"branch\" name=\"branch\">\n            <option value=\"CSE\">CSE</option>\n            <option value=\"IT\">IT</option>\n            <option value=\"AI_DS\">AI & DS</option>\n            <option value=\"ECE\">ECE</option>\n        </select><br><br>\n\n        <button type=\"submit\">Submit Registration</button>\n    </form>\n</body>\n</html>",
+    "time_complexity": "O(1)",
+    "space_complexity": "O(1)",
+    "explanation": "Implementation of Student Registration Form in HTML5."
+  },
+  {
+    "id": "css-responsive-navbar-grid",
+    "title": "Responsive Flexbox & Grid Navigation in CSS",
+    "question": "Create a modern, clean responsive navbar with CSS flexbox and mobile media query",
+    "language": "css",
+    "subject": "Web Technologies",
+    "topic": "CSS",
+    "subtopic": "Responsive Layout",
+    "difficulty": "Easy",
+    "tags": [
+      "css",
+      "css",
+      "responsive navbar css",
+      "flexbox navbar",
+      "css grid layout"
+    ],
+    "keywords": "responsive navbar css flexbox navbar css grid layout",
+    "code": "nav.navbar {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    background-color: #1e1e2e;\n    padding: 1rem 2rem;\n    color: #ffffff;\n}\n\nul.nav-links {\n    display: flex;\n    list-style: none;\n    gap: 1.5rem;\n}\n\nul.nav-links a {\n    color: #ffffff;\n    text-decoration: none;\n    transition: color 0.3s ease;\n}\n\nul.nav-links a:hover {\n    color: #00d4ff;\n}\n\n@media (max-width: 768px) {\n    nav.navbar { flex-direction: column; }\n    ul.nav-links { flex-direction: column; width: 100%; text-align: center; }\n}",
+    "time_complexity": "O(1)",
+    "space_complexity": "O(1)",
+    "explanation": "Implementation of Responsive Flexbox & Grid Navigation in CSS."
+  },
+  {
+    "id": "js-debounce-throttle",
+    "title": "Debounce Function in JavaScript",
+    "question": "Implement a reusable debounce function in JavaScript to optimize search input calls",
+    "language": "javascript",
+    "subject": "Web Technologies",
+    "topic": "JavaScript",
+    "subtopic": "Async / Performance",
+    "difficulty": "Medium",
+    "tags": [
+      "javascript",
+      "javascript",
+      "debounce in javascript",
+      "debounce function js",
+      "javascript debounce"
+    ],
+    "keywords": "debounce in javascript debounce function js javascript debounce",
+    "code": "function debounce(func, delay = 300) {\n    let timer;\n    return function (...args) {\n        clearTimeout(timer);\n        timer = setTimeout(() => {\n            func.apply(this, args);\n        }, delay);\n    };\n}\n\n// Example usage:\nconst handleSearch = debounce((query) => {\n    console.log(\"Searching for:\", query);\n}, 400);\n\nhandleSearch(\"SolveAI\");",
+    "time_complexity": "O(1)",
+    "space_complexity": "O(1)",
+    "explanation": "Implementation of Debounce Function in JavaScript."
+  }
+]

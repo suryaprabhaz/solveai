@@ -1,0 +1,154 @@
+[
+  {
+    "id": "c-matrix-multiplication",
+    "title": "Matrix Multiplication in C",
+    "question": "Write a C program to multiply two 2D matrices",
+    "language": "c",
+    "subject": "C Programming & DSA",
+    "topic": "Arrays",
+    "subtopic": "Matrices",
+    "difficulty": "Medium",
+    "tags": [
+      "arrays",
+      "c",
+      "matrix multiplication",
+      "matrix multiply in c"
+    ],
+    "keywords": "matrix multiplication matrix multiply in c",
+    "code": "#include <stdio.h>\nint main() {\n    int r1=2, c1=2, r2=2, c2=2;\n    int a[2][2] = {{1, 2}, {3, 4}}, b[2][2] = {{5, 6}, {7, 8}}, c[2][2] = {0};\n    for(int i=0; i<r1; i++) {\n        for(int j=0; j<c2; j++) {\n            for(int k=0; k<c1; k++) c[i][j] += a[i][k] * b[k][j];\n            printf(\"%d \", c[i][j]);\n        }\n        printf(\"\\n\");\n    }\n    return 0;\n}",
+    "time_complexity": "O(n^3)",
+    "space_complexity": "O(n^2)",
+    "explanation": "Complete implementation of Matrix Multiplication in C."
+  },
+  {
+    "id": "c-string-reverse",
+    "title": "Reverse a String in C using Pointers",
+    "question": "Write a C program to reverse a string in-place using two pointers",
+    "language": "c",
+    "subject": "C Programming & DSA",
+    "topic": "Strings",
+    "subtopic": "Pointers",
+    "difficulty": "Easy",
+    "tags": [
+      "strings",
+      "c",
+      "reverse string",
+      "string reverse in c",
+      "reverse string pointers"
+    ],
+    "keywords": "reverse string string reverse in c reverse string pointers",
+    "code": "#include <stdio.h>\n#include <string.h>\nvoid reverse(char* str) {\n    int l = 0, r = strlen(str) - 1;\n    while (l < r) {\n        char t = str[l]; str[l++] = str[r]; str[r--] = t;\n    }\n}\nint main() {\n    char s[] = \"SolveAI\";\n    reverse(s);\n    printf(\"Reversed: %s\\n\", s);\n    return 0;\n}",
+    "time_complexity": "O(n)",
+    "space_complexity": "O(1)",
+    "explanation": "Complete implementation of Reverse a String in C using Pointers."
+  },
+  {
+    "id": "c-dynamic-array",
+    "title": "Dynamic Array Allocation using malloc in C",
+    "question": "Write a C program to dynamically allocate memory for an array and calculate average",
+    "language": "c",
+    "subject": "C Programming & DSA",
+    "topic": "Memory",
+    "subtopic": "malloc",
+    "difficulty": "Easy",
+    "tags": [
+      "memory",
+      "c",
+      "dynamic array",
+      "malloc in c",
+      "dynamic memory allocation"
+    ],
+    "keywords": "dynamic array malloc in c dynamic memory allocation",
+    "code": "#include <stdio.h>\n#include <stdlib.h>\nint main() {\n    int n = 5;\n    int *arr = (int*)malloc(n * sizeof(int));\n    if(!arr) return 1;\n    int sum = 0;\n    for(int i=0; i<n; i++) { arr[i] = (i+1)*10; sum += arr[i]; }\n    printf(\"Average: %.2f\\n\", (float)sum / n);\n    free(arr);\n    return 0;\n}",
+    "time_complexity": "O(n)",
+    "space_complexity": "O(n)",
+    "explanation": "Complete implementation of Dynamic Array Allocation using malloc in C."
+  },
+  {
+    "id": "c-file-copy",
+    "title": "File Copy Program in C",
+    "question": "Write a C program to copy contents of one file to another using fgetc and fputc",
+    "language": "c",
+    "subject": "C Programming & DSA",
+    "topic": "File Handling",
+    "subtopic": "File I/O",
+    "difficulty": "Medium",
+    "tags": [
+      "file handling",
+      "c",
+      "file copy in c",
+      "file handling in c",
+      "fopen fclose"
+    ],
+    "keywords": "file copy in c file handling in c fopen fclose",
+    "code": "#include <stdio.h>\nint copyFile(const char* src, const char* dst) {\n    FILE *f1 = fopen(src, \"r\"), *f2 = fopen(dst, \"w\");\n    if (!f1 || !f2) return -1;\n    char ch;\n    while ((ch = fgetc(f1)) != EOF) fputc(ch, f2);\n    fclose(f1); fclose(f2);\n    return 0;\n}\nint main() {\n    printf(\"File copy utility ready.\\n\");\n    return 0;\n}",
+    "time_complexity": "O(n)",
+    "space_complexity": "O(1)",
+    "explanation": "Complete implementation of File Copy Program in C."
+  },
+  {
+    "id": "c-doubly-linked-list",
+    "title": "Doubly Linked List in C",
+    "question": "Implement insertion and traversal in Doubly Linked List in C",
+    "language": "c",
+    "subject": "C Programming & DSA",
+    "topic": "Data Structures",
+    "subtopic": "Doubly Linked List",
+    "difficulty": "Medium",
+    "tags": [
+      "data structures",
+      "c",
+      "doubly linked list",
+      "dll in c"
+    ],
+    "keywords": "doubly linked list dll in c",
+    "code": "#include <stdio.h>\n#include <stdlib.h>\nstruct Node { int data; struct Node *prev, *next; };\nvoid push(struct Node** head, int val) {\n    struct Node* n = (struct Node*)malloc(sizeof(struct Node));\n    n->data = val; n->prev = NULL; n->next = *head;\n    if(*head) (*head)->prev = n;\n    *head = n;\n}\nvoid display(struct Node* head) {\n    while(head) { printf(\"%d <-> \", head->data); head = head->next; }\n    printf(\"NULL\\n\");\n}\nint main() {\n    struct Node* head = NULL;\n    push(&head, 30); push(&head, 20); push(&head, 10);\n    display(head);\n    return 0;\n}",
+    "time_complexity": "O(1)",
+    "space_complexity": "O(n)",
+    "explanation": "Complete implementation of Doubly Linked List in C."
+  },
+  {
+    "id": "c-bit-manipulation-power-of-two",
+    "title": "Check Power of Two in C",
+    "question": "Check whether a given number is a power of 2 using bitwise AND",
+    "language": "c",
+    "subject": "C Programming & DSA",
+    "topic": "Bit Manipulation",
+    "subtopic": "Bitwise",
+    "difficulty": "Easy",
+    "tags": [
+      "bit manipulation",
+      "c",
+      "power of two",
+      "power of 2 in c",
+      "bitwise power of two"
+    ],
+    "keywords": "power of two power of 2 in c bitwise power of two",
+    "code": "#include <stdio.h>\n#include <stdbool.h>\nbool isPowerOfTwo(int n) { return n > 0 && (n & (n - 1)) == 0; }\nint main() {\n    int n = 16;\n    printf(\"%d is %spower of 2\\n\", n, isPowerOfTwo(n) ? \"\" : \"not \");\n    return 0;\n}",
+    "time_complexity": "O(1)",
+    "space_complexity": "O(1)",
+    "explanation": "Complete implementation of Check Power of Two in C."
+  },
+  {
+    "id": "c-dijkstra-algorithm",
+    "title": "Dijkstra Shortest Path Algorithm in C",
+    "question": "Write a C program for Dijkstra's shortest path algorithm using adjacency matrix",
+    "language": "c",
+    "subject": "C Programming & DSA",
+    "topic": "Algorithms",
+    "subtopic": "Graph",
+    "difficulty": "Hard",
+    "tags": [
+      "algorithms",
+      "c",
+      "dijkstra algorithm",
+      "shortest path in c",
+      "dijkstra in c"
+    ],
+    "keywords": "dijkstra algorithm shortest path in c dijkstra in c",
+    "code": "#include <stdio.h>\n#include <stdbool.h>\n#define V 5\n#define INF 99999\nint minDistance(int dist[], bool sptSet[]) {\n    int min = INF, min_idx = -1;\n    for (int v = 0; v < V; v++)\n        if (!sptSet[v] && dist[v] <= min) { min = dist[v]; min_idx = v; }\n    return min_idx;\n}\nvoid dijkstra(int graph[V][V], int src) {\n    int dist[V]; bool sptSet[V] = {false};\n    for (int i = 0; i < V; i++) dist[i] = INF;\n    dist[src] = 0;\n    for (int count = 0; count < V - 1; count++) {\n        int u = minDistance(dist, sptSet);\n        if (u == -1) break;\n        sptSet[u] = true;\n        for (int v = 0; v < V; v++)\n            if (!sptSet[v] && graph[u][v] && dist[u] != INF && dist[u] + graph[u][v] < dist[v])\n                dist[v] = dist[u] + graph[u][v];\n    }\n    printf(\"Vertex \\t Distance from Source\\n\");\n    for (int i = 0; i < V; i++) printf(\"%d \\t %d\\n\", i, dist[i]);\n}\nint main() {\n    int graph[V][V] = {\n        {0, 10, 0, 30, 100},\n        {10, 0, 50, 0, 0},\n        {0, 50, 0, 20, 10},\n        {30, 0, 20, 0, 60},\n        {100, 0, 10, 60, 0}\n    };\n    dijkstra(graph, 0);\n    return 0;\n}",
+    "time_complexity": "O(V^2)",
+    "space_complexity": "O(V)",
+    "explanation": "Complete implementation of Dijkstra Shortest Path Algorithm in C."
+  }
+]

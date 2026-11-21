@@ -1,6 +1,9 @@
+// Core syllabus database interface
+import { databaseService } from '../db/databaseService';
+
 export interface OfflineSolution {
   id: string;
-  language: string; // 'python' | 'r'
+  language: string; // 'python' | 'r' | 'c' | 'cpp' | 'java' | 'sql' etc.
   title: string;
   keywords: string[];
   code: string;
@@ -397,6 +400,23 @@ export function findOfflineMatch(query: string, documentLanguage?: string): Offl
   if (scoredMatches.length > 0) {
     scoredMatches.sort((a, b) => b.matchedLength - a.matchedLength);
     return scoredMatches[0].item;
+  }
+
+  // 3. NEW: Check against B.Tech Academic Database Service (SQLite/JSON catalog)
+  try {
+    const dbResults = databaseService.search(query, { language: targetLang, limit: 1 });
+    if (dbResults && dbResults.length > 0) {
+      const top = dbResults[0];
+      return {
+        id: top.id,
+        language: top.language,
+        title: top.title,
+        keywords: [top.title.toLowerCase()],
+        code: top.code
+      };
+    }
+  } catch (e) {
+    // Graceful fallback
   }
 
   return undefined;

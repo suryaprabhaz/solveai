@@ -2,6 +2,15 @@
 
 All notable changes to SolveAI will be documented in this file.
 
+## [0.1.4] - 2026-11-21
+
+### Added
+- Integrated B.Tech Engineering Curriculum database pipeline (`scripts/schema.py`, `scripts/importer.py`, `scripts/test_db.py`)
+- Added SQLite schema with full-text search (FTS5) and index optimization
+- Added comprehensive problem coverage across C, C++, Java, Python, SQL, MATLAB, and Web technologies
+- Added `data/catalog.json` embedding for zero-dependency instant retrieval across environments
+- Enhanced `databaseService.ts` with exact, keyword, and token-ranking multi-stage search
+
 ## [0.1.3] - 2026-11-20
 
 ### Changed

@@ -6,3 +6,5 @@ tsconfig.json
 **/*.map
 node_modules/**
 out/test/**
+data/batches/**
+scripts/**

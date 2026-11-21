@@ -1,0 +1,88 @@
+[
+  {
+    "id": "java-custom-exception",
+    "title": "Custom Exception Handling in Java",
+    "question": "Write a Java program demonstrating user-defined checked exception",
+    "language": "java",
+    "subject": "Java Programming & Architecture",
+    "topic": "Exception Handling",
+    "subtopic": "Custom Exceptions",
+    "difficulty": "Easy",
+    "tags": [
+      "exception handling",
+      "java",
+      "custom exception in java",
+      "user defined exception java"
+    ],
+    "keywords": "custom exception in java user defined exception java",
+    "code": "class InvalidAgeException extends Exception {\n    public InvalidAgeException(String message) { super(message); }\n}\n\npublic class Main {\n    static void checkEligibility(int age) throws InvalidAgeException {\n        if (age < 18) throw new InvalidAgeException(\"Age must be >= 18 to vote.\");\n        System.out.println(\"Eligible to vote.\");\n    }\n\n    public static void main(String[] args) {\n        try {\n            checkEligibility(15);\n        } catch (InvalidAgeException e) {\n            System.out.println(\"Caught Exception: \" + e.getMessage());\n        }\n    }\n}",
+    "time_complexity": "O(1)",
+    "space_complexity": "O(1)",
+    "explanation": "Implementation of Custom Exception Handling in Java."
+  },
+  {
+    "id": "java-producer-consumer",
+    "title": "Producer Consumer with Multithreading in Java",
+    "question": "Write a Java program to solve Producer-Consumer problem using wait() and notify()",
+    "language": "java",
+    "subject": "Java Programming & Architecture",
+    "topic": "Multithreading",
+    "subtopic": "Concurrency",
+    "difficulty": "Medium",
+    "tags": [
+      "multithreading",
+      "java",
+      "producer consumer java",
+      "multithreading java",
+      "wait notify java"
+    ],
+    "keywords": "producer consumer java multithreading java wait notify java",
+    "code": "import java.util.LinkedList;\n\nclass Buffer {\n    private final LinkedList<Integer> queue = new LinkedList<>();\n    private final int capacity = 2;\n\n    public synchronized void produce(int val) throws InterruptedException {\n        while (queue.size() == capacity) wait();\n        queue.add(val);\n        System.out.println(\"Produced: \" + val);\n        notifyAll();\n    }\n\n    public synchronized void consume() throws InterruptedException {\n        while (queue.isEmpty()) wait();\n        int val = queue.removeFirst();\n        System.out.println(\"Consumed: \" + val);\n        notifyAll();\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) throws InterruptedException {\n        Buffer b = new Buffer();\n        Thread t1 = new Thread(() -> { try { b.produce(1); b.produce(2); } catch (Exception ignored) {} });\n        Thread t2 = new Thread(() -> { try { b.consume(); b.consume(); } catch (Exception ignored) {} });\n        t1.start(); t2.start();\n        t1.join(); t2.join();\n    }\n}",
+    "time_complexity": "O(1) per item",
+    "space_complexity": "O(capacity)",
+    "explanation": "Implementation of Producer Consumer with Multithreading in Java."
+  },
+  {
+    "id": "java-stream-api",
+    "title": "Java Stream API and Lambda Operations",
+    "question": "Write a Java program using Stream API to filter even numbers, square them, and collect into a list",
+    "language": "java",
+    "subject": "Java Programming & Architecture",
+    "topic": "Collections",
+    "subtopic": "Streams",
+    "difficulty": "Easy",
+    "tags": [
+      "collections",
+      "java",
+      "java streams",
+      "stream api in java",
+      "lambda java"
+    ],
+    "keywords": "java streams stream api in java lambda java",
+    "code": "import java.util.*;\nimport java.util.stream.Collectors;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);\n        List<Integer> squares = nums.stream()\n                                    .filter(n -> n % 2 == 0)\n                                    .map(n -> n * n)\n                                    .collect(Collectors.toList());\n        System.out.println(\"Even Squares: \" + squares);\n    }\n}",
+    "time_complexity": "O(n)",
+    "space_complexity": "O(n)",
+    "explanation": "Implementation of Java Stream API and Lambda Operations."
+  },
+  {
+    "id": "java-binary-search-tree",
+    "title": "Binary Search Tree in Java",
+    "question": "Implement insert and inorder traversal in a Java Binary Search Tree",
+    "language": "java",
+    "subject": "Java Programming & Architecture",
+    "topic": "Data Structures",
+    "subtopic": "BST",
+    "difficulty": "Medium",
+    "tags": [
+      "data structures",
+      "java",
+      "bst in java",
+      "binary search tree java"
+    ],
+    "keywords": "bst in java binary search tree java",
+    "code": "class Node {\n    int key; Node left, right;\n    Node(int k) { key = k; }\n}\n\npublic class BST {\n    Node root;\n    Node insert(Node root, int key) {\n        if (root == null) return new Node(key);\n        if (key < root.key) root.left = insert(root.left, key);\n        else if (key > root.key) root.right = insert(root.right, key);\n        return root;\n    }\n    void inorder(Node root) {\n        if (root != null) {\n            inorder(root.left);\n            System.out.print(root.key + \" \");\n            inorder(root.right);\n        }\n    }\n    public static void main(String[] args) {\n        BST b = new BST();\n        b.root = b.insert(b.root, 50);\n        b.insert(b.root, 30);\n        b.insert(b.root, 70);\n        b.inorder(b.root);\n        System.out.println();\n    }\n}",
+    "time_complexity": "O(h)",
+    "space_complexity": "O(h)",
+    "explanation": "Implementation of Binary Search Tree in Java."
+  }
+]

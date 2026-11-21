@@ -1,0 +1,117 @@
+[
+  {
+    "id": "sql-second-highest-salary",
+    "title": "Second Highest Salary in SQL",
+    "question": "Write an SQL query to find the second highest salary from Employee table",
+    "language": "sql",
+    "subject": "Database Management Systems",
+    "topic": "Queries",
+    "subtopic": "Subqueries",
+    "difficulty": "Medium",
+    "tags": [
+      "queries",
+      "sql",
+      "dbms",
+      "second highest salary",
+      "second highest salary in sql",
+      "sql second highest salary"
+    ],
+    "keywords": "second highest salary second highest salary in sql sql second highest salary",
+    "code": "-- Method 1: Using Subquery\nSELECT MAX(salary) AS SecondHighestSalary\nFROM Employee\nWHERE salary < (SELECT MAX(salary) FROM Employee);\n\n-- Method 2: Using LIMIT & OFFSET\nSELECT DISTINCT salary AS SecondHighestSalary\nFROM Employee\nORDER BY salary DESC\nLIMIT 1 OFFSET 1;",
+    "time_complexity": "O(n log n)",
+    "space_complexity": "O(1)",
+    "explanation": "Implementation of Second Highest Salary in SQL in SQL/PL-SQL."
+  },
+  {
+    "id": "sql-join-departments",
+    "title": "INNER, LEFT, and RIGHT Joins in SQL",
+    "question": "Write SQL queries showing department names along with employee count using LEFT and INNER JOIN",
+    "language": "sql",
+    "subject": "Database Management Systems",
+    "topic": "Joins",
+    "subtopic": "Grouping",
+    "difficulty": "Easy",
+    "tags": [
+      "joins",
+      "sql",
+      "dbms",
+      "joins in sql",
+      "left join sql",
+      "group by join sql"
+    ],
+    "keywords": "joins in sql left join sql group by join sql",
+    "code": "-- Employee count per department\nSELECT d.dept_name, COUNT(e.emp_id) AS total_employees\nFROM Department d\nLEFT JOIN Employee e ON d.dept_id = e.dept_id\nGROUP BY d.dept_id, d.dept_name\nORDER BY total_employees DESC;",
+    "time_complexity": "O(n + m)",
+    "space_complexity": "O(k)",
+    "explanation": "Implementation of INNER, LEFT, and RIGHT Joins in SQL in SQL/PL-SQL."
+  },
+  {
+    "id": "sql-create-table-constraints",
+    "title": "Create Table with Primary Key, Foreign Key & Check Constraints",
+    "question": "Create standard relational schema for Students and Enrollments with integrity constraints",
+    "language": "sql",
+    "subject": "Database Management Systems",
+    "topic": "DDL",
+    "subtopic": "Constraints",
+    "difficulty": "Easy",
+    "tags": [
+      "ddl",
+      "sql",
+      "dbms",
+      "create table sql",
+      "sql ddl constraints",
+      "foreign key sql"
+    ],
+    "keywords": "create table sql sql ddl constraints foreign key sql",
+    "code": "CREATE TABLE Students (\n    student_id INT PRIMARY KEY,\n    name VARCHAR(100) NOT NULL,\n    gpa DECIMAL(3, 2) CHECK (gpa >= 0.0 AND gpa <= 10.0),\n    enrolled_date DATE DEFAULT CURRENT_DATE\n);\n\nCREATE TABLE Courses (\n    course_id INT PRIMARY KEY,\n    title VARCHAR(100) NOT NULL,\n    credits INT CHECK (credits > 0)\n);\n\nCREATE TABLE Enrollments (\n    enrollment_id INT PRIMARY KEY,\n    student_id INT,\n    course_id INT,\n    grade CHAR(1),\n    FOREIGN KEY (student_id) REFERENCES Students(student_id) ON DELETE CASCADE,\n    FOREIGN KEY (course_id) REFERENCES Courses(course_id) ON DELETE CASCADE\n);",
+    "time_complexity": "O(1)",
+    "space_complexity": "O(1)",
+    "explanation": "Implementation of Create Table with Primary Key, Foreign Key & Check Constraints in SQL/PL-SQL."
+  },
+  {
+    "id": "plsql-cursor-salary-increment",
+    "title": "PL/SQL Explicit Cursor for Salary Increment",
+    "question": "Write a PL/SQL block using an explicit cursor to give 10% salary increment to employees with salary < 30000",
+    "language": "sql",
+    "subject": "Database Management Systems",
+    "topic": "PL/SQL",
+    "subtopic": "Cursors",
+    "difficulty": "Medium",
+    "tags": [
+      "pl/sql",
+      "sql",
+      "dbms",
+      "plsql cursor",
+      "pl sql cursor",
+      "cursor in plsql"
+    ],
+    "keywords": "plsql cursor pl sql cursor cursor in plsql",
+    "code": "DECLARE\n    CURSOR emp_cur IS\n        SELECT emp_id, salary FROM Employee WHERE salary < 30000 FOR UPDATE;\n    v_emp_id Employee.emp_id%TYPE;\n    v_salary Employee.salary%TYPE;\nBEGIN\n    OPEN emp_cur;\n    LOOP\n        FETCH emp_cur INTO v_emp_id, v_salary;\n        EXIT WHEN emp_cur%NOTFOUND;\n        UPDATE Employee\n        SET salary = salary * 1.10\n        WHERE CURRENT OF emp_cur;\n        DBMS_OUTPUT.PUT_LINE('Updated Emp ID: ' || v_emp_id || ' New Salary: ' || (v_salary * 1.10));\n    END LOOP;\n    CLOSE emp_cur;\n    COMMIT;\nEND;\n/",
+    "time_complexity": "O(n)",
+    "space_complexity": "O(1)",
+    "explanation": "Implementation of PL/SQL Explicit Cursor for Salary Increment in SQL/PL-SQL."
+  },
+  {
+    "id": "plsql-trigger-audit",
+    "title": "PL/SQL Trigger for Audit Logging",
+    "question": "Create a BEFORE UPDATE trigger on Employee table to log previous salary into Audit_Log table",
+    "language": "sql",
+    "subject": "Database Management Systems",
+    "topic": "PL/SQL",
+    "subtopic": "Triggers",
+    "difficulty": "Medium",
+    "tags": [
+      "pl/sql",
+      "sql",
+      "dbms",
+      "plsql trigger",
+      "trigger in plsql",
+      "audit trigger plsql"
+    ],
+    "keywords": "plsql trigger trigger in plsql audit trigger plsql",
+    "code": "CREATE OR REPLACE TRIGGER trg_audit_salary\nBEFORE UPDATE OF salary ON Employee\nFOR EACH ROW\nBEGIN\n    INSERT INTO Audit_Log (emp_id, old_salary, new_salary, change_date)\n    VALUES (:OLD.emp_id, :OLD.salary, :NEW.salary, SYSDATE);\nEND;\n/",
+    "time_complexity": "O(1)",
+    "space_complexity": "O(1)",
+    "explanation": "Implementation of PL/SQL Trigger for Audit Logging in SQL/PL-SQL."
+  }
+]

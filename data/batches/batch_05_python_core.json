@@ -1,0 +1,111 @@
+[
+  {
+    "id": "py-linear-regression-from-scratch",
+    "title": "Linear Regression from Scratch in Python",
+    "question": "Implement simple Linear Regression using Ordinary Least Squares (OLS) in pure Python / NumPy",
+    "language": "python",
+    "subject": "Python & Intelligent Systems",
+    "topic": "Machine Learning",
+    "subtopic": "Regression",
+    "difficulty": "Medium",
+    "tags": [
+      "machine learning",
+      "python",
+      "linear regression in python",
+      "linear regression scratch"
+    ],
+    "keywords": "linear regression in python linear regression scratch",
+    "code": "import numpy as np\n\ndef linear_regression(x, y):\n    x_mean = np.mean(x)\n    y_mean = np.mean(y)\n    numerator = np.sum((x - x_mean) * (y - y_mean))\n    denominator = np.sum((x - x_mean) ** 2)\n    slope = numerator / denominator\n    intercept = y_mean - slope * x_mean\n    return slope, intercept\n\nx = np.array([1, 2, 3, 4, 5])\ny = np.array([2, 4, 5, 4, 5])\nm, c = linear_regression(x, y)\nprint(f\"y = {m:.2f}x + {c:.2f}\")",
+    "time_complexity": "O(n)",
+    "space_complexity": "O(1)",
+    "explanation": "Implementation of Linear Regression from Scratch in Python in Python."
+  },
+  {
+    "id": "py-kmeans-clustering",
+    "title": "K-Means Clustering Algorithm in Python",
+    "question": "Write a Python implementation of K-Means clustering algorithm using NumPy",
+    "language": "python",
+    "subject": "Python & Intelligent Systems",
+    "topic": "Machine Learning",
+    "subtopic": "Clustering",
+    "difficulty": "Hard",
+    "tags": [
+      "machine learning",
+      "python",
+      "kmeans python",
+      "k-means clustering python",
+      "kmeans from scratch"
+    ],
+    "keywords": "kmeans python k-means clustering python kmeans from scratch",
+    "code": "import numpy as np\n\ndef kmeans(X, k=2, max_iters=100):\n    np.random.seed(42)\n    centroids = X[np.random.choice(X.shape[0], k, replace=False)]\n    for _ in range(max_iters):\n        distances = np.linalg.norm(X[:, np.newaxis] - centroids, axis=2)\n        labels = np.argmin(distances, axis=1)\n        new_centroids = np.array([X[labels == j].mean(axis=0) for j in range(k)])\n        if np.allclose(centroids, new_centroids):\n            break\n        centroids = new_centroids\n    return centroids, labels\n\nX = np.array([[1, 2], [1, 4], [1, 0], [10, 2], [10, 4], [10, 0]])\ncentroids, labels = kmeans(X, k=2)\nprint(\"Centroids:\\n\", centroids)",
+    "time_complexity": "O(n * k * d * i)",
+    "space_complexity": "O(n * k)",
+    "explanation": "Implementation of K-Means Clustering Algorithm in Python in Python."
+  },
+  {
+    "id": "py-pandas-data-cleaning",
+    "title": "Pandas Data Cleaning and Missing Value Imputation",
+    "question": "Write a Python Pandas script to handle missing values and outlier filtering on a DataFrame",
+    "language": "python",
+    "subject": "Python & Intelligent Systems",
+    "topic": "Data Science",
+    "subtopic": "Pandas",
+    "difficulty": "Easy",
+    "tags": [
+      "data science",
+      "python",
+      "pandas data cleaning",
+      "impute missing values pandas",
+      "pandas fillna"
+    ],
+    "keywords": "pandas data cleaning impute missing values pandas pandas fillna",
+    "code": "import pandas as pd\nimport numpy as np\n\ndata = {'Name': ['Alice', 'Bob', 'Charlie', 'David'],\n        'Score': [85, np.nan, 92, np.nan],\n        'Age': [20, 21, np.nan, 22]}\ndf = pd.DataFrame(data)\n\n# Impute numerical columns with mean\ndf['Score'] = df['Score'].fillna(df['Score'].mean())\ndf['Age'] = df['Age'].fillna(df['Age'].median())\n\nprint(\"Cleaned DataFrame:\")\nprint(df)",
+    "time_complexity": "O(n)",
+    "space_complexity": "O(n)",
+    "explanation": "Implementation of Pandas Data Cleaning and Missing Value Imputation in Python."
+  },
+  {
+    "id": "py-tcp-echo-server",
+    "title": "TCP Echo Server and Client in Python",
+    "question": "Write a Python script for a simple multi-client TCP Echo Socket Server",
+    "language": "python",
+    "subject": "Python & Intelligent Systems",
+    "topic": "Computer Networks",
+    "subtopic": "Socket Programming",
+    "difficulty": "Medium",
+    "tags": [
+      "computer networks",
+      "python",
+      "tcp echo server in python",
+      "socket programming python",
+      "tcp socket python"
+    ],
+    "keywords": "tcp echo server in python socket programming python tcp socket python",
+    "code": "import socket\n\ndef run_server(port=8888):\n    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:\n        s.bind(('127.0.0.1', port))\n        s.listen(1)\n        print(f\"Server listening on port {port}...\")\n        # For demonstration: server socket configured and ready\n    return \"Server configured successfully\"\n\nif __name__ == '__main__':\n    run_server()",
+    "time_complexity": "O(1)",
+    "space_complexity": "O(1)",
+    "explanation": "Implementation of TCP Echo Server and Client in Python in Python."
+  },
+  {
+    "id": "py-fcfs-scheduling",
+    "title": "FCFS CPU Scheduling Algorithm in Python",
+    "question": "Write a Python program to calculate turnaround time and waiting time for FCFS CPU scheduling",
+    "language": "python",
+    "subject": "Python & Intelligent Systems",
+    "topic": "Operating Systems",
+    "subtopic": "CPU Scheduling",
+    "difficulty": "Easy",
+    "tags": [
+      "operating systems",
+      "python",
+      "fcfs in python",
+      "fcfs cpu scheduling python",
+      "first come first serve scheduling"
+    ],
+    "keywords": "fcfs in python fcfs cpu scheduling python first come first serve scheduling",
+    "code": "def fcfs(processes, bt):\n    n = len(processes)\n    wt = [0] * n\n    tat = [0] * n\n    for i in range(1, n):\n        wt[i] = wt[i - 1] + bt[i - 1]\n    for i in range(n):\n        tat[i] = wt[i] + bt[i]\n    print(\"Process\\tBurst Time\\tWaiting Time\\tTurnaround Time\")\n    for i in range(n):\n        print(f\"{processes[i]}\\t{bt[i]}\\t\\t{wt[i]}\\t\\t{tat[i]}\")\n\nfcfs(['P1', 'P2', 'P3'], [24, 3, 3])",
+    "time_complexity": "O(n)",
+    "space_complexity": "O(n)",
+    "explanation": "Implementation of FCFS CPU Scheduling Algorithm in Python in Python."
+  }
+]

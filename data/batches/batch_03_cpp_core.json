@@ -1,0 +1,117 @@
+[
+  {
+    "id": "cpp-vector-stl",
+    "title": "Vector Operations in C++ STL",
+    "question": "Write a C++ program demonstrating std::vector insert, erase, sort, and iteration",
+    "language": "cpp",
+    "subject": "Object Oriented Programming & STL",
+    "topic": "STL",
+    "subtopic": "Vector",
+    "difficulty": "Easy",
+    "tags": [
+      "stl",
+      "cpp",
+      "c++",
+      "vector in cpp",
+      "cpp vector stl",
+      "std vector"
+    ],
+    "keywords": "vector in cpp cpp vector stl std vector",
+    "code": "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nint main() {\n    std::vector<int> v = {40, 10, 20, 50, 30};\n    v.push_back(60);\n    std::sort(v.begin(), v.end());\n    std::cout << \"Sorted vector: \";\n    for (int x : v) std::cout << x << \" \";\n    std::cout << \"\\nSize: \" << v.size() << \"\\n\";\n    return 0;\n}",
+    "time_complexity": "O(n log n)",
+    "space_complexity": "O(n)",
+    "explanation": "Implementation of Vector Operations in C++ STL in C++."
+  },
+  {
+    "id": "cpp-oop-inheritance",
+    "title": "Inheritance and Virtual Polymorphism in C++",
+    "question": "Write a C++ program demonstrating base class, derived class, and runtime polymorphism with virtual function",
+    "language": "cpp",
+    "subject": "Object Oriented Programming & STL",
+    "topic": "OOP",
+    "subtopic": "Polymorphism",
+    "difficulty": "Medium",
+    "tags": [
+      "oop",
+      "cpp",
+      "c++",
+      "inheritance in cpp",
+      "polymorphism in cpp",
+      "virtual function cpp"
+    ],
+    "keywords": "inheritance in cpp polymorphism in cpp virtual function cpp",
+    "code": "#include <iostream>\n#include <memory>\n\nclass Shape {\npublic:\n    virtual void draw() const = 0; // Pure virtual function\n    virtual ~Shape() = default;\n};\n\nclass Circle : public Shape {\npublic:\n    void draw() const override { std::cout << \"Drawing Circle\\n\"; }\n};\n\nclass Rectangle : public Shape {\npublic:\n    void draw() const override { std::cout << \"Drawing Rectangle\\n\"; }\n};\n\nint main() {\n    std::unique_ptr<Shape> s1 = std::make_unique<Circle>();\n    std::unique_ptr<Shape> s2 = std::make_unique<Rectangle>();\n    s1->draw();\n    s2->draw();\n    return 0;\n}",
+    "time_complexity": "O(1)",
+    "space_complexity": "O(1)",
+    "explanation": "Implementation of Inheritance and Virtual Polymorphism in C++ in C++."
+  },
+  {
+    "id": "cpp-operator-overloading",
+    "title": "Operator Overloading in C++ (Complex Number)",
+    "question": "Write a C++ program to overload the + operator for adding two complex numbers",
+    "language": "cpp",
+    "subject": "Object Oriented Programming & STL",
+    "topic": "OOP",
+    "subtopic": "Operator Overloading",
+    "difficulty": "Medium",
+    "tags": [
+      "oop",
+      "cpp",
+      "c++",
+      "operator overloading",
+      "complex number cpp",
+      "operator overload"
+    ],
+    "keywords": "operator overloading complex number cpp operator overload",
+    "code": "#include <iostream>\n\nclass Complex {\nprivate:\n    double real, imag;\npublic:\n    Complex(double r = 0, double i = 0) : real(r), imag(i) {}\n    Complex operator+(const Complex& other) const {\n        return Complex(real + other.real, imag + other.imag);\n    }\n    void print() const { std::cout << real << \" + \" << imag << \"i\\n\"; }\n};\n\nint main() {\n    Complex c1(3.5, 2.5), c2(1.5, 4.5);\n    Complex c3 = c1 + c2;\n    std::cout << \"Sum: \"; c3.print();\n    return 0;\n}",
+    "time_complexity": "O(1)",
+    "space_complexity": "O(1)",
+    "explanation": "Implementation of Operator Overloading in C++ (Complex Number) in C++."
+  },
+  {
+    "id": "cpp-lru-cache",
+    "title": "LRU Cache Implementation in C++",
+    "question": "Implement Least Recently Used (LRU) Cache in C++ using std::unordered_map and std::list",
+    "language": "cpp",
+    "subject": "Object Oriented Programming & STL",
+    "topic": "Data Structures",
+    "subtopic": "Cache",
+    "difficulty": "Hard",
+    "tags": [
+      "data structures",
+      "cpp",
+      "c++",
+      "lru cache",
+      "lru cache cpp",
+      "least recently used cache"
+    ],
+    "keywords": "lru cache lru cache cpp least recently used cache",
+    "code": "#include <iostream>\n#include <unordered_map>\n#include <list>\n\nclass LRUCache {\n    int capacity;\n    std::list<std::pair<int, int>> items;\n    std::unordered_map<int, std::list<std::pair<int, int>>::iterator> map;\npublic:\n    LRUCache(int cap) : capacity(cap) {}\n    int get(int key) {\n        if (map.find(key) == map.end()) return -1;\n        items.splice(items.begin(), items, map[key]);\n        return map[key]->second;\n    }\n    void put(int key, int val) {\n        if (map.find(key) != map.end()) {\n            items.splice(items.begin(), items, map[key]);\n            map[key]->second = val;\n            return;\n        }\n        if (items.size() == capacity) {\n            map.erase(items.back().first);\n            items.pop_back();\n        }\n        items.emplace_front(key, val);\n        map[key] = items.begin();\n    }\n};\n\nint main() {\n    LRUCache cache(2);\n    cache.put(1, 10);\n    cache.put(2, 20);\n    std::cout << \"Get 1: \" << cache.get(1) << \"\\n\";\n    cache.put(3, 30); // evicts key 2\n    std::cout << \"Get 2: \" << cache.get(2) << \"\\n\";\n    return 0;\n}",
+    "time_complexity": "O(1) get & put",
+    "space_complexity": "O(capacity)",
+    "explanation": "Implementation of LRU Cache Implementation in C++ in C++."
+  },
+  {
+    "id": "cpp-bfs-dfs-graph",
+    "title": "BFS and DFS Graph Traversal in C++",
+    "question": "Write a C++ program implementing Breadth First Search (BFS) and Depth First Search (DFS)",
+    "language": "cpp",
+    "subject": "Object Oriented Programming & STL",
+    "topic": "Algorithms",
+    "subtopic": "Graph Traversals",
+    "difficulty": "Medium",
+    "tags": [
+      "algorithms",
+      "cpp",
+      "c++",
+      "bfs in cpp",
+      "dfs in cpp",
+      "graph traversal cpp"
+    ],
+    "keywords": "bfs in cpp dfs in cpp graph traversal cpp",
+    "code": "#include <iostream>\n#include <vector>\n#include <queue>\n\nvoid bfs(int start, const std::vector<std::vector<int>>& adj, int n) {\n    std::vector<bool> visited(n, false);\n    std::queue<int> q;\n    visited[start] = true; q.push(start);\n    std::cout << \"BFS: \";\n    while (!q.empty()) {\n        int u = q.front(); q.pop();\n        std::cout << u << \" \";\n        for (int v : adj[u]) {\n            if (!visited[v]) { visited[v] = true; q.push(v); }\n        }\n    }\n    std::cout << \"\\n\";\n}\n\nint main() {\n    int n = 5;\n    std::vector<std::vector<int>> adj(n);\n    adj[0] = {1, 2}; adj[1] = {0, 3}; adj[2] = {0, 4}; adj[3] = {1}; adj[4] = {2};\n    bfs(0, adj, n);\n    return 0;\n}",
+    "time_complexity": "O(V + E)",
+    "space_complexity": "O(V)",
+    "explanation": "Implementation of BFS and DFS Graph Traversal in C++ in C++."
+  }
+]
